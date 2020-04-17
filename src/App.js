@@ -1,26 +1,49 @@
 import React from 'react';
-import logo from './logo.svg';
+import moment from 'moment';
 import './App.css';
 
-function App() {
-  return (
+
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      offers: [],
+      links: {},
+      nextPage: null,
+    };
+  }
+
+  componentDidMount() {
+
+
+    var startOfWeek = moment().day(1).format("Y-MM-DD");
+    var endOfWeek = moment().day(7).format("Y-MM-DD");
+    var companyId = 6;
+    var pageNumber = 1;
+    var pageSize = 10;
+
+    fetch(`https://back.staging.bsport.io/api/v1/offer/?min_date=${startOfWeek}&max_date=${endOfWeek}&company=${companyId}&page=${pageNumber}&page_size=${pageSize}`)
+      .then(data => data.json())
+      .then(data => {
+        this.setState({
+          offers: data.results,
+          nextPage: data.nextPage,
+          links: data.links
+        })
+      });
+     
+  }
+
+  render() {
+
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Test  
     </div>
-  );
+    );
+
+  }
 }
 
 export default App;
