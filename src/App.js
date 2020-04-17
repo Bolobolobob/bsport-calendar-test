@@ -1,5 +1,10 @@
 import React from 'react';
 import moment from 'moment';
+
+import ListOffers from './components/ListOffers';
+
+import data from './components/data.json'
+
 import './App.css';
 
 
@@ -7,18 +12,26 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+    /*
     this.state = {
       offers: [],
       links: {},
       nextPage: null,
     };
+    */
+    this.state = {
+      offers: data.results,
+      links: data.links,
+      nextPage: data.nextPage,
+    }
   }
 
+  /*
   componentDidMount() {
 
 
-    var startOfWeek = moment().day(1).format("Y-MM-DD");
-    var endOfWeek = moment().day(7).format("Y-MM-DD");
+    var startOfWeek = moment().weekday(0).format("Y-MM-DD");
+    var endOfWeek = moment().weekday(6).format("Y-MM-DD");
     var companyId = 6;
     var pageNumber = 1;
     var pageSize = 10;
@@ -34,12 +47,15 @@ class App extends React.Component {
       });
      
   }
+  */
 
   render() {
 
+    const offers = this.state.offers;
+
     return (
     <div className="App">
-      Test  
+      <ListOffers offers={offers}/> 
     </div>
     );
 
