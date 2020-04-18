@@ -1,7 +1,8 @@
 import React from 'react';
-import moment from 'moment';
 
 import DailyOffers from './DailyOffers';
+
+import '../App.css';
 
 
 class ListOffers extends React.Component {

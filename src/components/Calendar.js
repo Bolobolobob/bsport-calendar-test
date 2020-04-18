@@ -3,6 +3,8 @@ import moment from 'moment';
 
 import CalendarDay from './CalendarDay';
 
+import '../App.css';
+
 class Calendar extends React.Component {
 
   constructor(props) {

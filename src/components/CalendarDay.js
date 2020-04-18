@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../App.css';
+
 class CalendarDay extends React.Component {
 
   render() {
@@ -9,8 +11,12 @@ class CalendarDay extends React.Component {
 
     return (
     <div className="calendarDay">
-        {date.format("ddd, DD")}
-        {'*'.repeat(numOffers)}
+        <div>
+            {date.format("ddd, DD")}
+        </div>
+        <div>
+            {'*'.repeat(numOffers)}
+        </div>
     </div>
     );
 
