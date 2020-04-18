@@ -6,48 +6,35 @@ import DailyOffers from './DailyOffers';
 
 class ListOffers extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-    this.getDaysOfWeek = this.getDaysOfWeek.bind(this);
-    this.getOffersPerDay = this.getOffersPerDay.bind(this);
-  }
-
-  getDaysOfWeek() {
-    
-    var weekDays = [];
-
-    for(let i=0; i<7; i++){
-      weekDays.push(moment().weekday(i));
-    }
-
-    return weekDays;
-  }
-
-  getOffersPerDay(offers) {
-
-    var offersPerDay = [[], [], [], [], [], [], []];
-
-    for(let i=0; i<offers.length; i++) {
-      var offerDate = moment(offers[i].date_start);
-      var dayOfWeek = offerDate.weekday();
-
-      offersPerDay[dayOfWeek].push(offers[i]);
-    }
-
-    return offersPerDay;
-
-  }
-
   render() {
     
-    const offersPerDay = this.getOffersPerDay(this.props.offers);
-    const daysOfWeek = this.getDaysOfWeek();
-    const days = [0, 1, 2, 3, 4, 5, 6];
+    const offersPerDay = this.props.offersPerDay;
+    const selectedDay = this.props.selectedDay;
 
-    const listOffers = days.map((i) =>
-      <DailyOffers key={daysOfWeek[i]} offers={offersPerDay[i]} day={daysOfWeek[i]} />
-    );
+    let listOffers;
+    if (offersPerDay.length > 0) {
+      listOffers = offersPerDay.map((dailyOffers) => {
+
+        if (selectedDay) {
+          if(dailyOffers.date.isSame(selectedDay, 'day')) {
+            return(
+              <DailyOffers key={dailyOffers.date} offers={dailyOffers.offers} day={dailyOffers.date} />
+            )
+          }
+          else {
+            return null;
+          }
+        } else {
+          return(
+            <DailyOffers key={dailyOffers.date} offers={dailyOffers.offers} day={dailyOffers.date} />
+          )
+        }
+        
+      });
+    } else {
+      listOffers = null;
+    }
+
 
     return (
     <div className="listOffers">
