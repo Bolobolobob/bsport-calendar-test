@@ -4,10 +4,6 @@ import Offer from './Offer'
 
 class DailyOffers extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
 
     const day = this.props.day;
@@ -21,7 +17,9 @@ class DailyOffers extends React.Component {
 
     return (
       <div className="dailyOffers">
-        {day.format()}
+        <strong>
+          {day.format("dddd, MMMM Do YYYY")}
+        </strong>
         {offersList}  
       </div>
     );
