@@ -3,10 +3,6 @@ import moment from 'moment';
 
 class Offer extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
 
     const offer = this.props.value;
@@ -18,11 +14,9 @@ class Offer extends React.Component {
     const activity = offer.activity;
     const establishment = offer.establishment;
 
-    console.log(offer.duration_minute);
-
     return (
     <div className="offer">
-      {startingDate.format("HH:mm")}-{endingDate.format("HH:mm")} effectif: {effectif}
+      {startingDate.format("HH:mm")}-{endingDate.format("HH:mm")} effectif: {effectif} activity: {activity} establishment: {establishment}
     </div>
     );
 
