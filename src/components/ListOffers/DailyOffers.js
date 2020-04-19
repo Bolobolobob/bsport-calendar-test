@@ -20,8 +20,8 @@ class DailyOffers extends React.Component {
     let offersList;
     if(offers.length > 0){
       offersList = offers.map((offer) =>
-        <li className='listElement'>
-          <Offer key={offer.id} value={offer} />
+        <li className='listElement' key={offer.id}>
+          <Offer value={offer} />
         </li>
       );
     } else {
