@@ -15,6 +15,7 @@ class ListOffers extends React.Component {
     const offersPerDay = this.props.offersPerDay;
     const selectedDay = this.props.selectedDay;
 
+    /* Depending on wether or not a day is selected we display the offers */
     let listOffers;
     if (offersPerDay.length > 0) {
 

@@ -24,6 +24,9 @@ class Calendar extends React.Component {
 
   }
 
+  /** When the component finishes mounting we initialize the displayed week to the current week
+   * and send it the handler in App.js
+   */
   componentDidMount(){
     var startOfWeek = moment().weekday(0);
 
@@ -35,6 +38,7 @@ class Calendar extends React.Component {
 
   }
 
+  /** Handler for when the user clicks on a day of the calendar */
   handleClick(date) {
 
     var selectedDay = null;
@@ -68,34 +72,34 @@ class Calendar extends React.Component {
     const endOfWeek = moment(startOfWeek).add(6, 'd')
     const offersPerDay = this.props.offersPerDay;
 
-    let weekDisplay;
+    let calendarHeader;
     let calendarDays;
     if(startOfWeek) {
-      weekDisplay = `${startOfWeek.format("ddd, DD/MM")} - ${endOfWeek.format("ddd, DD/MM")}`
+      calendarHeader = `${startOfWeek.format("ddd, DD/MM")} - ${endOfWeek.format("ddd, DD/MM")}`
       calendarDays = offersPerDay.map((dailyOffers) => {
 
-        let clickableDay;
+        let classClickableDay;
         if(this.state.selectedDay && this.state.selectedDay.isSame(dailyOffers.date, 'day')) {
-          clickableDay = "selectedDay";
+          classClickableDay = "selectedDay";
         } else {
-          clickableDay = "notSelectedDay";
+          classClickableDay = "notSelectedDay";
         }
 
         return(
-          <div  className={clickableDay} key={dailyOffers.date} onClick={() => this.handleClick(dailyOffers.date)}>
+          <div  className={classClickableDay} key={dailyOffers.date} onClick={() => this.handleClick(dailyOffers.date)}>
             <CalendarDay numOffers={dailyOffers.offers.length} date={dailyOffers.date} />
           </div>
         )        
       })
     } else {
-      weekDisplay = ''
+      calendarHeader = ''
       calendarDays = null;
     }
 
     return (
     <div className="calendar">
       <div className="calendarTop">
-        {weekDisplay}
+        {calendarHeader}
       </div>
       <div className="calendarDays">
         {calendarDays}

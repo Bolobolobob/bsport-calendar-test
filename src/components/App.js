@@ -30,6 +30,7 @@ class App extends React.Component {
 
   }
 
+  /** Handler for when the selected week of the calendar changes */
   handleWeekChange(startOfWeek) {
 
     this.setState({
@@ -52,12 +53,16 @@ class App extends React.Component {
 
   }
 
+  /** Handler for when the user selects a new day of the calendar */
   handleSelectDay(date) {
     this.setState({
       selectedDay: date,
     });
   }
 
+  /** Returns a list of dict containing the offers of each day
+   * The form of the list is : list = [{date: moment(), offers: []}, {..}, {..}, ..]
+   */
   getOffersPerDay(offers) {
 
     var offersPerDay = [];
@@ -84,6 +89,7 @@ class App extends React.Component {
 
   }
 
+  /** Returns a list containing the days of the week */
   getDaysOfWeek() {
     
     var weekDays = [];
