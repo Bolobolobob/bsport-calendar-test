@@ -4,11 +4,12 @@ import moment from 'moment';
 import ListOffers from './components/ListOffers';
 import Calendar from './components/Calendar';
 
-import data from './components/data.json'
-
 import './App.css';
 
-
+/**
+ * Main component of the app
+ * Contains most of the stateful logic
+ */
 class App extends React.Component {
 
   constructor(props) {
@@ -19,7 +20,6 @@ class App extends React.Component {
       links: null,
       nextPage: null,
       startOfWeek: null,
-      endOfWeek: null,
       selectedDay: null,
     }
     
@@ -30,20 +30,17 @@ class App extends React.Component {
 
   }
 
-  handleWeekChange(startOfWeek, endOfWeek) {
+  handleWeekChange(startOfWeek) {
 
     this.setState({
       startOfWeek: startOfWeek,
-      endOfWeek: endOfWeek,
     });
 
     var companyId = 6;
-    var pageNumber = 1;
-    var pageSize = 10;
     var formattedStartOfWeek = startOfWeek.format("Y-MM-DD");
-    var formattedEndOfWeek = endOfWeek.format("Y-MM-DD");
+    var formattedEndOfWeek = moment(startOfWeek).add(6, 'd').format("Y-MM-DD");
 
-    fetch(`https://back.staging.bsport.io/api/v1/offer/?min_date=${formattedStartOfWeek}&max_date=${formattedEndOfWeek}&company=${companyId}&page=${pageNumber}&page_size=${pageSize}`)
+    fetch(`https://back.staging.bsport.io/api/v1/offer/?min_date=${formattedStartOfWeek}&max_date=${formattedEndOfWeek}&company=${companyId}`)
     .then(data => data.json())
     .then(data => {
       this.setState({
