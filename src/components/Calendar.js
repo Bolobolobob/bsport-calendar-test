@@ -5,14 +5,19 @@ import CalendarDay from './CalendarDay';
 
 import '../App.css';
 
+/**
+ * Displays a simplified weekly calendar
+ * with a header indicating the current week
+ * and a body with the days of the week and the number
+ * of offers per day
+ */
 class Calendar extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-        startOfWeek: '',
-        endOfWeek: '',
-        selectedDay: null,
+      startOfWeek: '',
+      selectedDay: null,
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -21,14 +26,12 @@ class Calendar extends React.Component {
 
   componentDidMount(){
     var startOfWeek = moment().weekday(0);
-    var endOfWeek = moment().weekday(6);
 
     this.setState({
-        startOfWeek: startOfWeek,
-        endOfWeek: endOfWeek
+      startOfWeek: startOfWeek,
     });
 
-    this.props.onWeekChange(startOfWeek, endOfWeek);
+    this.props.onWeekChange(startOfWeek);
 
   }
 
@@ -37,59 +40,56 @@ class Calendar extends React.Component {
     var selectedDay = null;
 
     if(this.state.selectedDay){
-        if(this.state.selectedDay.isSame(date, 'day')) {
-            this.setState({
-                selectedDay: null,
-            });
-            selectedDay = null
-        } else {
-            this.setState({
-                selectedDay: date,
-            })
-            selectedDay = date
-        }
-    } else {
+      if(this.state.selectedDay.isSame(date, 'day')) {
         this.setState({
-            selectedDay: date,
+          selectedDay: null,
+        });
+        selectedDay = null
+      } else {
+        this.setState({
+          selectedDay: date,
         })
         selectedDay = date
+      }
+    } else {
+      this.setState({
+        selectedDay: date,
+      })
+      selectedDay = date
     }
     
-
     this.props.onSelectDayChange(selectedDay);
 
-      console.log(date);
   }
 
   render() {
 
     const startOfWeek = this.state.startOfWeek;
-    const endOfWeek = this.state.endOfWeek;
+    const endOfWeek = moment(startOfWeek).add(6, 'd')
     const offersPerDay = this.props.offersPerDay;
 
     let weekDisplay;
     let calendarDays;
     if(startOfWeek) {
-        weekDisplay = `${startOfWeek.format("ddd, DD/MM")} - ${endOfWeek.format("ddd, DD/MM")}`
-        calendarDays = offersPerDay.map((dailyOffers) => {
+      weekDisplay = `${startOfWeek.format("ddd, DD/MM")} - ${endOfWeek.format("ddd, DD/MM")}`
+      calendarDays = offersPerDay.map((dailyOffers) => {
 
-            let clickableDay;
-            if(this.state.selectedDay && this.state.selectedDay.isSame(dailyOffers.date, 'day')) {
-                clickableDay = "selectedDay";
-            } else {
-                clickableDay = "notSelectedDay";
-            }
+        let clickableDay;
+        if(this.state.selectedDay && this.state.selectedDay.isSame(dailyOffers.date, 'day')) {
+          clickableDay = "selectedDay";
+        } else {
+          clickableDay = "notSelectedDay";
+        }
 
-            return(
-                <div  className={clickableDay} key={dailyOffers.date} onClick={() => this.handleClick(dailyOffers.date)}>
-                    <CalendarDay numOffers={dailyOffers.offers.length} date={dailyOffers.date} />
-                </div>
-
-            )        
-        })
+        return(
+          <div  className={clickableDay} key={dailyOffers.date} onClick={() => this.handleClick(dailyOffers.date)}>
+            <CalendarDay numOffers={dailyOffers.offers.length} date={dailyOffers.date} />
+          </div>
+        )        
+      })
     } else {
-        weekDisplay = ''
-        calendarDays = null;
+      weekDisplay = ''
+      calendarDays = null;
     }
 
     return (
