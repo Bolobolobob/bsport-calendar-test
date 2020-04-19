@@ -3,6 +3,9 @@ import moment from 'moment';
 
 import '../App.css';
 
+/**
+ * Displays a single offer
+ */
 class Offer extends React.Component {
 
   render() {

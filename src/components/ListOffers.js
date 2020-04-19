@@ -4,7 +4,10 @@ import DailyOffers from './DailyOffers';
 
 import '../App.css';
 
-
+/**
+ * Displays a list of all the offers of
+ * a time period. The offers are grouped by day.
+ */
 class ListOffers extends React.Component {
 
   render() {
@@ -14,6 +17,7 @@ class ListOffers extends React.Component {
 
     let listOffers;
     if (offersPerDay.length > 0) {
+
       listOffers = offersPerDay.map((dailyOffers) => {
 
         if (selectedDay) {
