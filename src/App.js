@@ -13,20 +13,11 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    /*
-    this.state = {
-      offers: [],
-      links: {},
-      nextPage: null,
-      startOfWeek: null,
-      endOfWeek: null,
-    };
-    */
 
     this.state = {
       offers: [],
-      links: data.links,
-      nextPage: data.nextPage,
+      links: null,
+      nextPage: null,
       startOfWeek: null,
       endOfWeek: null,
       selectedDay: null,
