@@ -4,19 +4,25 @@ import Offer from './Offer'
 
 import '../App.css';
 
+/**
+ * Displays a group of daily offers and 
+ * the name of the day
+ */
 class DailyOffers extends React.Component {
 
   render() {
 
     const day = this.props.day;
 
-    var offers = this.props.offers;
+    let offers = this.props.offers;
     offers.sort((a, b) => (a.date_start > b.date_start) ? 1 : -1);
 
     let offersList;
     if(offers.length > 0){
       offersList = offers.map((offer) =>
-        <Offer key={offer.id} value={offer} />
+        <li className='listElement'>
+          <Offer key={offer.id} value={offer} />
+        </li>
       );
     } else {
       offersList = 'No offers'
@@ -29,7 +35,9 @@ class DailyOffers extends React.Component {
           {day.format("dddd, MMMM Do YYYY")}
         </strong>
         <div className="dailyOffersList">
-          {offersList}
+          <ul>
+            {offersList}
+          </ul>
         </div>  
       </div>
     );
