@@ -2,7 +2,7 @@ import React from 'react';
 
 import Offer from './Offer'
 
-import '../App.css';
+import './ListOffers.css';
 
 /**
  * Displays a group of daily offers and 

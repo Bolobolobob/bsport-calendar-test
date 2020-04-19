@@ -1,0 +1,15 @@
+/* List offers display ------------------------------------------ */
+
+.listOffers{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.dailyOffers{
+    margin-bottom: 30px;
+}
+
+.dayName{
+    margin-bottom: 20px;
+}

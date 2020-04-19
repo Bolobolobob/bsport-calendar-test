@@ -1,8 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 
-import ListOffers from './components/ListOffers';
-import Calendar from './components/Calendar';
+import ListOffers from './ListOffers/ListOffers';
+import Calendar from './Calendar/Calendar';
 
 import './App.css';
 

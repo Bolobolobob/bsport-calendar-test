@@ -3,7 +3,7 @@ import moment from 'moment';
 
 import CalendarDay from './CalendarDay';
 
-import '../App.css';
+import './Calendar.css';
 
 /**
  * Displays a simplified weekly calendar

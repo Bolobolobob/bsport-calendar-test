@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import '../App.css';
+import './ListOffers.css';
 
 /**
  * Displays a single offer
