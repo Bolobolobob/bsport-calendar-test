@@ -18,7 +18,7 @@ class Offer extends React.Component {
 
     return (
     <div className="offer">
-      {startingDate.format("HH:mm")}-{endingDate.format("HH:mm")} effectif: {effectif} activity: {activity} establishment: {establishment}
+      {startingDate.format("HH:mm")}-{endingDate.format("HH:mm")} Number of people: {effectif} Activity: {activity} Location: {establishment}
     </div>
     );
 
